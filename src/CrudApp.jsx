@@ -81,15 +81,9 @@ function CrudApp() {
     }
   };
 
-  // const handleLogout = () => {
-  //   localStorage.removeItem("isLoggedIn");  // Clear the login state from localStorage
-  //   window.location.reload();  // Force a full page reload
-  // };
-
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");  
-    setIsLoggedIn(false);  
-    navigate("/"); 
+    localStorage.removeItem("isLoggedIn");  // Clear the login state from localStorage
+    navigate("/");  // Redirect to the home page (login page)
   };
 
   return (
