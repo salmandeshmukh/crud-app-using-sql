@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const API_BASE = "https://next.salmandeshmukh.com/php"; // your backend URL
 
@@ -7,6 +8,7 @@ function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // useNavigate for navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +29,10 @@ function Login({ onLogin }) {
       setError('An error occurred during login. Please try again.');
       console.error("Login error:", err);
     }
+  };
+
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
   };
 
   return (
@@ -75,6 +81,9 @@ function Login({ onLogin }) {
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
             <a href="/register" className="text-blue-600 hover:text-blue-700 font-medium">Sign Up</a>
+          </p>
+          <p className="text-sm text-gray-600 mt-2 cursor-pointer">
+            <span onClick={handleForgotPassword} className="text-blue-600 hover:text-blue-700 font-medium">Forgot Password?</span>
           </p>
         </div>
       </div>

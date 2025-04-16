@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import SignUp from "./Signup"; // Import your SignUp component
 import CrudApp from "./CrudApp";
+import ForgotPassword from "./ForgotPassword";
 
 const API_BASE = "https://next.salmandeshmukh.com/php";
 
@@ -49,24 +50,28 @@ function App() {
 
   return (
     <Routes>
-      {/* Route for login page */}
-      <Route
-        path="/"
-        element={isLoggedIn ? <CrudApp onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
-      />
+  {/* Route for login or home page */}
+  <Route
+    path="/"
+    element={isLoggedIn ? <CrudApp onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
+  />
 
-      {/* Route for CRUD page (only accessible if logged in) */}
-      <Route
-        path="/CrudApp"
-        element={isLoggedIn ? <CrudApp onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
-      />
-      
-      {/* Route for login page */}
-      <Route path="/" element={<Login />} /> {/* Add this route */}
+  {/* Route for CRUD page (optional, can use this for direct access) */}
+  <Route
+    path="/CrudApp"
+    element={isLoggedIn ? <CrudApp onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
+  />
 
-      {/* Route for registration page */}
-      <Route path="/register" element={<SignUp />} /> {/* Add this route */}
-    </Routes>
+  {/* Route for login page */}
+  <Route path="/login" element={<Login />} />
+
+  {/* Route for registration page */}
+  <Route path="/register" element={<SignUp />} />
+
+  {/* Route for forgot password page */}
+  <Route path="/forgot-password" element={<ForgotPassword/>} />
+</Routes>
+
   );
 }
 
