@@ -5,6 +5,7 @@ import Login from "./Login";
 import SignUp from "./Signup"; // Import your SignUp component
 import CrudApp from "./CrudApp";
 import ForgotPassword from "./ForgotPassword";
+import Footer from "./Footer";
 
 const API_BASE = "https://next.salmandeshmukh.com/php";
 
@@ -49,6 +50,7 @@ function App() {
   };
 
   return (
+    <>
     <Routes>
   {/* Route for login or home page */}
   <Route
@@ -71,6 +73,10 @@ function App() {
   {/* Route for forgot password page */}
   <Route path="/forgot-password" element={<ForgotPassword/>} />
 </Routes>
+
+<Footer />
+
+</>
 
   );
 }
