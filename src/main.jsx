@@ -1,12 +1,13 @@
 import React from 'react';
+import ReactDOM from 'react-dom/client'; // Updated import for React 18
+import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
+import App from './App';
+import './index.css';
 
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+const root = ReactDOM.createRoot(document.getElementById('root')); // Create a root using createRoot
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+root.render(
+  <BrowserRouter> {/* Wrap the entire app in BrowserRouter */}
     <App />
-  </StrictMode>,
-)
+  </BrowserRouter>
+);
