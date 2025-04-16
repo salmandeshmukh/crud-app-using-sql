@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./Login";
+import SignUp from "./Signup"; // Import your SignUp component
 import CrudApp from "./CrudApp";
 
 const API_BASE = "https://next.salmandeshmukh.com/php";
@@ -17,12 +18,15 @@ function App() {
 
   const handleLogin = async (username, password) => {
     try {
-      const response = await axios.post(`${API_BASE}/login.php`,
-        new URLSearchParams({ username, password }), {
+      const response = await axios.post(
+        `${API_BASE}/login.php`,
+        new URLSearchParams({ username, password }),
+        {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            "Content-Type": "application/x-www-form-urlencoded",
           },
-        });
+        }
+      );
 
       if (response.data.status === "success") {
         setIsLoggedIn(true); // ✅ update state
@@ -37,10 +41,31 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn"); // Remove login state
+    setIsLoggedIn(false); // Update the login state
+    navigate("/"); // Redirect to the login page
+  };
+
   return (
     <Routes>
-      <Route path="/" element={isLoggedIn ? <CrudApp /> : <Login onLogin={handleLogin} />} />
-      <Route path="/CrudApp" element={isLoggedIn ? <CrudApp /> : <Login onLogin={handleLogin} />} />
+      {/* Route for login page */}
+      <Route
+        path="/"
+        element={isLoggedIn ? <CrudApp onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
+      />
+
+      {/* Route for CRUD page (only accessible if logged in) */}
+      <Route
+        path="/CrudApp"
+        element={isLoggedIn ? <CrudApp onLogout={handleLogout} /> : <Login onLogin={handleLogin} />}
+      />
+      
+      {/* Route for login page */}
+      <Route path="/" element={<Login />} /> {/* Add this route */}
+
+      {/* Route for registration page */}
+      <Route path="/register" element={<SignUp />} /> {/* Add this route */}
     </Routes>
   );
 }
