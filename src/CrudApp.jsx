@@ -84,7 +84,9 @@ function CrudApp() {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");  // Clear the login state from localStorage
     navigate("/");  // Redirect to the home page (login page)
+    window.location.reload(); 
   };
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 relative">
